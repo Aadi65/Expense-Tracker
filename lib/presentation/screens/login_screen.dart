@@ -1,3 +1,4 @@
+import 'package:com_cipherschools_assignment/models/transaction.dart';
 import 'package:com_cipherschools_assignment/presentation/common_widgets/custom_button.dart';
 import 'package:com_cipherschools_assignment/presentation/common_widgets/custom_textfield.dart';
 import 'package:com_cipherschools_assignment/presentation/screens/main_screen.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -106,11 +108,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   );
                               FirebaseAuth.instance
                                   .authStateChanges()
-                                  .listen((User? user) {
+                                  .listen((User? user) async {
                                 if (user != null) {
                                   setState(() {
                                     isLoading = false;
                                   });
+                                  await Hive.openBox<Transaction>(
+                                      'transactions');
                                   ref.refresh(userProvider);
                                   if (context.mounted) {
                                     Navigator.pushReplacement(
@@ -162,11 +166,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             );
                         FirebaseAuth.instance
                             .authStateChanges()
-                            .listen((User? user) {
+                            .listen((User? user) async {
                           if (user != null) {
                             setState(() {
                               isLoading = false;
                             });
+                            await Hive.openBox<Transaction>('transactions');
                             if (context.mounted) {
                               Navigator.pushReplacement(
                                 context,

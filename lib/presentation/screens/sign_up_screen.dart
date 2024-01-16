@@ -1,3 +1,4 @@
+import 'package:com_cipherschools_assignment/models/transaction.dart';
 import 'package:com_cipherschools_assignment/presentation/screens/main_screen.dart';
 import 'package:com_cipherschools_assignment/providers/auth_provider.dart';
 import 'package:com_cipherschools_assignment/utils/colors.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -154,11 +156,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                       password: passwordController.text.trim());
                               FirebaseAuth.instance
                                   .authStateChanges()
-                                  .listen((User? user) {
+                                  .listen((User? user) async {
                                 if (user != null) {
                                   setState(() {
                                     isLoading = false;
                                   });
+                                  await Hive.openBox<Transaction>(
+                                      'transactions');
                                   if (context.mounted) {
                                     Navigator.pushReplacement(
                                       context,
@@ -206,8 +210,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             );
                         FirebaseAuth.instance
                             .authStateChanges()
-                            .listen((User? user) {
+                            .listen((User? user) async {
                           if (user != null) {
+                            await Hive.openBox<Transaction>('transactions');
                             if (context.mounted) {
                               Navigator.pushReplacement(
                                 context,

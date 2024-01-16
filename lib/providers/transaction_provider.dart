@@ -32,6 +32,10 @@ class TransactionNotifier extends AsyncNotifier<List<Transaction>> {
   Future<List<Transaction>> getCart() async {
     return await _transactionService.getTransactions();
   }
+
+  Future<void> deleteAll() async {
+    return await _transactionService.deleteAll();
+  }
 }
 
 final selectedFilterProvider = StateProvider<String>((ref) => 'Today');

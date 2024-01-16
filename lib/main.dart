@@ -21,7 +21,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionAdapter());
   Hive.registerAdapter(ModeAdapter());
-  await Hive.openBox<Transaction>('transactions');
   runApp(
     const ProviderScope(
       child: MyApp(),

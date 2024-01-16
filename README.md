@@ -1,16 +1,29 @@
-# com_cipherschools_assignment
+# Expense Tracker App
 
-A new Flutter project.
+An expense tracker app built with Flutter to help you manage your expenses on the go.
+
+## Features
+
+- Add and categorize expenses
+- View a summary of expenses
+- Track expenses over time
+- Simple and intuitive user interface
+
+## Screenshots
+
+![Expense Tracker App](screenshots/screenshot1.png)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Follow these steps to clone and run the app on your local machine:
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Git](https://git-scm.com/)
+- [Flutter](https://flutter.dev/docs/get-started/install)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Clone the Repository
+
+```bash
+git clone https://github.com/Aditya-Mi/CipherSchools-Flutter-Assignment.git
+

@@ -1,11 +1,13 @@
 import 'package:com_cipherschools_assignment/presentation/screens/login_screen.dart';
 import 'package:com_cipherschools_assignment/presentation/widgets/profile_screen_list_item.dart';
 import 'package:com_cipherschools_assignment/providers/auth_provider.dart';
+import 'package:com_cipherschools_assignment/providers/transaction_provider.dart';
 import 'package:com_cipherschools_assignment/providers/user_provider.dart';
 import 'package:com_cipherschools_assignment/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -20,6 +22,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     await ref.read(authRepositoryProvider).signOut();
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('id');
+    await ref.read(transactionProvider.notifier).deleteAll();
+    Hive.close();
+    ref.invalidate(transactionProvider);
+
     if (context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
