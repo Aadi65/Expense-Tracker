@@ -6,6 +6,7 @@ import 'package:com_cipherschools_assignment/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -17,6 +18,8 @@ class ProfileScreen extends ConsumerStatefulWidget {
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void signOut() async {
     await ref.read(authRepositoryProvider).signOut();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('id');
     if (context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(

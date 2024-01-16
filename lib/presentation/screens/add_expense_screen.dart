@@ -219,14 +219,14 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
                           ),
                         ),
                         const SizedBox(
-                          height: 16,
+                          height: 12,
                         ),
                         CustomTextfield(
                           hint: 'Description',
                           controller: descriptionController,
                         ),
                         const SizedBox(
-                          height: 16,
+                          height: 12,
                         ),
                         Container(
                           width: double.infinity,

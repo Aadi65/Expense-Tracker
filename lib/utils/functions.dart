@@ -22,7 +22,7 @@ Color getBackgroundColor(String category) {
     case 'House':
       return green20;
     default:
-      return Colors.lightGreen;
+      return Colors.lightGreenAccent;
   }
 }
 
@@ -56,6 +56,6 @@ String getIconString(String category) {
     case 'House':
       return 'assets/icons/home.svg';
     default:
-      return 'wallet_3';
+      return 'assets/icons/wallet_3.svg';
   }
 }

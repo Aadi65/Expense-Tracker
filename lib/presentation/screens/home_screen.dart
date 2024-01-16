@@ -257,8 +257,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         )
                       : ListView.builder(
                           itemBuilder: (builder, index) {
-                            return TransactionListItem(
-                              transaction: filteredTransactions[index],
+                            return Dismissible(
+                              key: UniqueKey(),
+                              onDismissed: (direction) {
+                                ref
+                                    .read(transactionProvider.notifier)
+                                    .deleteTransaction(
+                                        filteredTransactions[index].id);
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        const Text('Removed from favourites'),
+                                    action: SnackBarAction(
+                                      label: 'Undo',
+                                      onPressed: () {
+                                        ref
+                                            .read(transactionProvider.notifier)
+                                            .addTransaction(
+                                                filteredTransactions[index]);
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: TransactionListItem(
+                                transaction: filteredTransactions[index],
+                              ),
                             );
                           },
                           itemCount: filteredTransactions.length,
