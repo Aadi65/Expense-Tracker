@@ -19,6 +19,12 @@ Follow these steps to clone and run the app on your local machine:
 
 ### Prerequisites
 
+### Apk
+
+You can find apk here https://github.com/Aditya-Mi/CipherSchools-Flutter-Assignment/tree/main/apk
+In apk folder
+
+
 - [Git](https://git-scm.com/)
 - [Flutter](https://flutter.dev/docs/get-started/install)
 
