@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "642575079084",
+    "project_id": "com-cipherschools-assignment",
+    "storage_bucket": "com-cipherschools-assignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642575079084:android:e3379dce17232f9a247109",
+        "android_client_info": {
+          "package_name": "com.cipherschools.assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642575079084-bq6d56d434est8jdrt3u2abhote5kr45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cipherschools.assignment",
+            "certificate_hash": "02846f1c3045a7defb988935bcfaccd78d9ad164"
+          }
+        },
+        {
+          "client_id": "642575079084-u5add9mqrcgd2rrgo0u1u342jikfiqa0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuwHVfHklQRAR4tmvpfHUI3yOV5OLY8ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642575079084-u5add9mqrcgd2rrgo0u1u342jikfiqa0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
