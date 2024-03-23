@@ -11,7 +11,22 @@ An expense tracker app built with Flutter to help you manage your expenses on th
 
 ## Screenshots
 
-![Expense Tracker App](screenshots/screenshot1.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="<img width="195" alt="image" src="https://github.com/Aditya-Mi/Expense-Tracker/assets/112800760/808d1404-baca-41a6-b8f9-759938954095">
+" alt="HomeScreen" width="250"/>
+    </td>
+    <td align="center">
+      <img src="<img width="190" alt="image" src="https://github.com/Aditya-Mi/Expense-Tracker/assets/112800760/a317396c-862c-45cd-97f4-670f22438ca6">
+" alt="ItemDetailsScreen" width="250"/>
+    </td>
+    <td align="center">
+      <img src="![image](https://github.com/Aditya-Mi/Expense-Tracker/assets/112800760/c0ace919-df78-4fca-ba95-d96a1921620e)
+" alt="ProfileScreen" width="250"/>
+    </td>
+  </tr>
+</table>
 
 ## Getting Started
 
