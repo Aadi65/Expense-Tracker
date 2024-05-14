@@ -1,10 +1,13 @@
 import 'package:com_cipherschools_assignment/models/transaction.dart';
-import 'package:com_cipherschools_assignment/presentation/widgets/filter_item.dart';
+import 'package:com_cipherschools_assignment/presentation/widgets/custom_dropdown.dart';
 import 'package:com_cipherschools_assignment/presentation/widgets/transaction_list_item.dart';
 import 'package:com_cipherschools_assignment/providers/transaction_provider.dart';
 import 'package:com_cipherschools_assignment/utils/colors.dart';
+import 'package:com_cipherschools_assignment/utils/functions.dart';
+import 'package:com_cipherschools_assignment/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class TransactionScreen extends ConsumerStatefulWidget {
   const TransactionScreen({super.key});
@@ -14,56 +17,46 @@ class TransactionScreen extends ConsumerStatefulWidget {
 }
 
 class _TransactionScreenState extends ConsumerState<TransactionScreen> {
-  List<Transaction> filteredTransactions = [];
-  void toggleFilter(String selectedCategory, String category) {
-    if (selectedCategory == category) {
-      ref.read(selectedFilterProvider.notifier).state = '';
-    } else {
-      ref.read(selectedFilterProvider.notifier).state = category;
+  int currentYear = 0;
+  int currentMonth = 0;
+  final List<String> years = [];
+  late String _selectedMonth;
+  late String _selectedYear;
+
+  @override
+  void initState() {
+    super.initState();
+    final currentDate = DateTime.now();
+    currentMonth = currentDate.month;
+    currentYear = currentDate.year;
+    _selectedMonth = DateFormat.MMMM().format(currentDate);
+    _selectedYear = DateFormat.y().format(currentDate);
+    for (int i = currentYear - 10; i <= currentYear; i++) {
+      years.add(i.toString());
     }
   }
 
-  List<Transaction> filterItemsByTime(
-      List<Transaction> items, String duration) {
-    DateTime now = DateTime.now();
+  List<Transaction> filteredTransactions = [];
 
-    return items.where((item) {
-      DateTime itemDate = item.createdOn;
-      switch (duration) {
-        case 'Today':
-          return itemDate.isAfter(now.subtract(const Duration(days: 1))) &&
-              itemDate.isBefore(now.add(const Duration(days: 1)));
-        case 'Week':
-          return itemDate.isAfter(now.subtract(const Duration(days: 7))) &&
-              itemDate.isBefore(now.add(const Duration(days: 1)));
-        case 'Month':
-          return itemDate.isAfter(now.subtract(const Duration(days: 30))) &&
-              itemDate.isBefore(now.add(const Duration(days: 1)));
-        case 'Year':
-          return itemDate.isAfter(now.subtract(const Duration(days: 365))) &&
-              itemDate.isBefore(now.add(const Duration(days: 1)));
-        default:
-          return itemDate == itemDate;
-      }
-    }).toList();
+  void onMonthChange(String? value) {
+    setState(() {
+      _selectedMonth = value!;
+    });
+  }
+
+  void onYearChange(String? value) {
+    setState(() {
+      _selectedYear = value!;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final selectedFilter = ref.watch(selectedFilterProvider);
     final transactions = ref.watch(transactionProvider);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-          ),
+          leading: null,
           elevation: 0.0,
           backgroundColor: light80,
           centerTitle: true,
@@ -76,10 +69,11 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen> {
         ),
         body: transactions.when(
           data: (data) {
-            List<Transaction> filteredTransactions = data;
-            if (selectedFilter.isNotEmpty) {
-              filteredTransactions = filterItemsByTime(data, selectedFilter);
-            }
+            List<Transaction> filteredTransactions = [];
+
+            filteredTransactions =
+                filterTransactionsByMonth(data, _selectedMonth, _selectedYear);
+
             return Column(
               children: [
                 const SizedBox(
@@ -88,33 +82,17 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    FilterItem(
-                      title: 'Today',
-                      onPressed: () {
-                        toggleFilter(selectedFilter, 'Today');
-                      },
-                      selectedFilter: selectedFilter,
+                    CustomDropDown(
+                      selectedMonth: _selectedMonth,
+                      onChanged: onMonthChange,
+                      items: months,
+                      width: 120,
                     ),
-                    FilterItem(
-                      title: 'Week',
-                      onPressed: () {
-                        toggleFilter(selectedFilter, 'Week');
-                      },
-                      selectedFilter: selectedFilter,
-                    ),
-                    FilterItem(
-                      title: 'Month',
-                      onPressed: () {
-                        toggleFilter(selectedFilter, 'Month');
-                      },
-                      selectedFilter: selectedFilter,
-                    ),
-                    FilterItem(
-                      title: 'Year',
-                      onPressed: () {
-                        toggleFilter(selectedFilter, 'Year');
-                      },
-                      selectedFilter: selectedFilter,
+                    CustomDropDown(
+                      selectedMonth: _selectedYear,
+                      onChanged: onYearChange,
+                      items: years,
+                      width: 96,
                     ),
                   ],
                 ),

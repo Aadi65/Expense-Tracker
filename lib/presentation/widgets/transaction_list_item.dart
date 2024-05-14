@@ -73,8 +73,8 @@ class TransactionListItem extends StatelessWidget {
             children: [
               Text(
                 transaction.transactionType == 'Income'
-                    ? '+\u{20B9} ${transaction.amount}'
-                    : '-\u{20B9} ${transaction.amount}',
+                    ? '+\u{20B9}${transaction.amount}'
+                    : '-\u{20B9}${transaction.amount}',
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: 'Inter',

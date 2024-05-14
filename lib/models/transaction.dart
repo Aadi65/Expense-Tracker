@@ -42,7 +42,7 @@ List<String> expenseCategory = [
   'Food',
   'Shopping',
   'Subscription',
-  'House'
+  'Household',
 ];
 List<String> incomeCategory = ['Deposits', 'Savings', 'Salary'];
 

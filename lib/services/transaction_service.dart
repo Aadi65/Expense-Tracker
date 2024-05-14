@@ -10,7 +10,7 @@ class TransactionService {
   late List<Transaction> _transactions;
 
   Future<List<Transaction>> getTransactions() async {
-    _box = Hive.box('transactions');
+    _box = Hive.box<Transaction>('transactions');
     _transactions = _box.values.toList();
     return _transactions;
   }

@@ -14,9 +14,9 @@ class IncomeExpenseItem extends StatelessWidget {
     final w = MediaQuery.of(context).size.width;
     return Container(
       width: w * 0.4533,
-      height: h * 0.09592,
+      height: h * 0.09692,
       decoration: BoxDecoration(
-        color: title == 'Income' ? green100 : red100,
+        color: title == 'Budget' ? green100 : red100,
         borderRadius: BorderRadius.circular(
           20,
         ),
@@ -38,7 +38,7 @@ class IncomeExpenseItem extends StatelessWidget {
               title == 'Income'
                   ? 'assets/icons/income.svg'
                   : 'assets/icons/expense.svg',
-              color: title == 'Income' ? green100 : red100,
+              color: title == 'Balance' ? green100 : red100,
               width: 24,
               height: h * 0.03448,
               fit: BoxFit.scaleDown,
@@ -61,7 +61,7 @@ class IncomeExpenseItem extends StatelessWidget {
                 ),
               ),
               Text(
-                amount,
+                '\u{20B9}$amount',
                 style: const TextStyle(
                   fontSize: 20,
                   fontFamily: 'Inter',

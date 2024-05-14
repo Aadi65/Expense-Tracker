@@ -17,10 +17,11 @@ class FilterItem extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: selectedFilter == title ? yellow20 : light80,
+          border: Border.all(color: Colors.black),
+          color: selectedFilter == title ? blue100 : light80,
         ),
         child: Text(
           title,
@@ -28,7 +29,7 @@ class FilterItem extends StatelessWidget {
             fontSize: 14,
             fontFamily: 'Inter',
             fontWeight: FontWeight.bold,
-            color: selectedFilter == title ? yellow100 : light20,
+            color: selectedFilter == title ? Colors.white : Colors.black,
           ),
         ),
       ),
